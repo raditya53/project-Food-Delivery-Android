@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginPage">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/logo"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:drawableLeft="@drawable/custom_email"
+        android:drawablePadding="12dp"
+        android:background="@drawable/custom_input"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:ems="15"
+        android:layout_below="@id/logo"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        android:hint="email"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:drawableLeft="@drawable/custom_lock"
+        android:drawablePadding="12dp"
+        android:background="@drawable/custom_input"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:ems="15"
+        android:layout_below="@id/username"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:password="true"
+        android:hint="password"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/forgotpassword"
+        android:layout_below="@id/password"
+        android:text="forgot your password?"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="#0087f5"
+        android:linksClickable="true"/>
+    <Button
+        android:background="@drawable/background_home"
+        android:id="@+id/Button_start"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:layout_below="@id/password"
+        android:layout_marginTop="120dp"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:id="@+id/signup"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/Button_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="haven't account ? sign up here"
+        android:textColor="#0087f5"
+        android:layout_marginTop="5dp"
+        android:linksClickable="true"/>
+
+</RelativeLayout>
+

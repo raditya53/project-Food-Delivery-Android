@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="370dp"
+    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/containertanggal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:id="@+id/imgstatus"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/corner"/>
+            <TextView
+                android:id="@+id/tanggalhistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16/01/2021"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/idtransaksi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:text="192015351251"/>
+
+            <TextView
+                android:id="@+id/totalhargahistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="right"
+                android:text="152000"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/content_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/containertanggal"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp">
+            <ImageView
+                android:id="@+id/imgHistory"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/historyimg"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp">
+
+                <TextView
+                    android:id="@+id/namamakanan_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Spaghetti Bolognese"
+                    android:textSize="18dp" />
+                <TextView
+                    android:id="@+id/jumlahmakanan_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="1 Total Barang"
+                    android:textSize="16dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/content_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="right">
+            <Button
+                android:id="@+id/button_detail"
+                android:background="@drawable/background_history"
+                android:layout_width="130dp"
+                android:layout_height="30dp"
+                android:text="Detail"
+                android:textColor="@color/white"
+                android:layout_marginRight="10dp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

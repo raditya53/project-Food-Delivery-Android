@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentPage"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Payment"
+        android:textSize="40sp"
+        android:layout_marginVertical="20dp"
+        android:gravity="center"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_marginVertical="10dp">
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="ID TRANSAKSI : "
+        android:gravity="center"
+        android:textSize="22sp"/>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="ID TRANSAKSI"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:id="@+id/noTrans"/>
+
+</LinearLayout>
+
+    <TextView
+        android:layout_marginVertical="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Silahkan Upload Bukti Pembayaran Anda Ke\n\nxxxxxxxx a.n. FoodDelivery\n\nBerita Transaksi Adalah ID Transaksi Anda, Terima Kasih"
+        android:textSize="20sp"
+        android:gravity="center"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Picture"
+        android:id="@+id/btnUploadPayment"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:id="@+id/imgPayment"
+        android:layout_marginVertical="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="Total Harga"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:id="@+id/hargapayment"/>
+
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:text="Bayar"
+            android:textSize="20sp"
+            android:id="@+id/btnPayment"/>
+
+    </LinearLayout>
+
+</LinearLayout>

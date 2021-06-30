@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bglogin">
+        <TextView
+            android:id="@+id/brand"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="FoodDelivery"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:gravity="left|center"/>
+    </androidx.appcompat.widget.Toolbar>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/cancel_button"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_baseline_cancel_24"
+        android:layout_gravity="end"
+        android:visibility="invisible"/>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/iconSearch"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_baseline_search_24"
+        android:layout_gravity="end"/>
+    <EditText
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:hint="Search..."
+        android:id="@+id/search_bar"
+        android:layout_marginTop="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/custom_input"
+        android:visibility="invisible"
+        android:ems="15"
+        android:layout_gravity="center_horizontal"/>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp">
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+            <TableLayout
+                android:id="@+id/categorycontainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:isScrollContainer="true">
+                <TableRow>
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+                        <ImageButton
+                            android:background="@drawable/logoall"
+                            android:id="@+id/Kategori_All"
+                            android:layout_height="50dp"
+                            android:layout_width="50dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="All"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+                        <ImageButton
+                            android:background="@drawable/chicken"
+                            android:id="@+id/Kategori_Makanan"
+                            android:layout_height="50dp"
+                            android:layout_width="50dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chicken"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+                        <ImageButton
+                            android:background="@drawable/berger"
+                            android:id="@+id/Kategori_Burger"
+                            android:layout_height="50dp"
+                            android:layout_width="50dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Burger"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+                        <ImageButton
+                            android:background="@drawable/pastaa"
+                            android:id="@+id/Kategori_Pasta"
+                            android:layout_height="50dp"
+                            android:layout_width="50dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pasta"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+                        <ImageButton
+                            android:background="@drawable/sidedish"
+                            android:id="@+id/Kategori_Sidedish"
+                            android:layout_height="50dp"
+                            android:layout_width="50dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Side Dish"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+                        <ImageButton
+                            android:background="@drawable/coffeee"
+                            android:id="@+id/Kategori_Coffee"
+                            android:layout_height="50dp"
+                            android:layout_width="50dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Coffee"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+                        <ImageButton
+                            android:background="@drawable/minumanlogo"
+                            android:id="@+id/Kategori_Minuman"
+                            android:layout_height="50dp"
+                            android:layout_width="50dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Drink"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+                        <ImageButton
+                            android:background="@drawable/desert"
+                            android:id="@+id/Kategori_Desert"
+                            android:layout_height="50dp"
+                            android:layout_width="50dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Desert"/>
+                    </LinearLayout>
+
+
+                </TableRow>
+            </TableLayout>
+        </HorizontalScrollView>
+
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/addData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="145dp"
+        android:text="All"
+        android:textSize="20dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        />
+
+
+</FrameLayout>

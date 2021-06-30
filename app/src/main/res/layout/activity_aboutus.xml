@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background_home"
+    tools:context=".About_us">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MAKAN LIH"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:letterSpacing="0.1"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:id="@+id/textt"
+        android:layout_marginTop="200dp"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Version Beta 1.0"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/textt"
+        android:layout_centerHorizontal="true"/>
+    <ImageView
+        android:id="@+id/logoo"
+        android:layout_below="@id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/logo_tanpatext"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" @2021 Lih Dit Inc."
+        android:id="@+id/text2"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_below="@+id/logoo"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>
