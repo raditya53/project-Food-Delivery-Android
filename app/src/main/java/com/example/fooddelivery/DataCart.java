@@ -1,18 +1,18 @@
 package com.example.fooddelivery;
 
 public class DataCart {
-    private String idCart,idMenu, idCustomer, NamaMenu, QuantityMenu ,HargaMenu;
+    private String idCart, idMenu, idCustomer, namaMenu, quantityMenu , hargaMenu;
 
-    public DataCart(String idCart, String idMenu, String idCustomer, String namaMenu, String quantityMenu, String hargaMenu) {
+    public DataCart() {
+    }
+
+    public DataCart(String hargaMenu, String idCart, String idCustomer, String idMenu, String namaMenu, String quantityMenu) {
         this.idCart = idCart;
         this.idMenu = idMenu;
         this.idCustomer = idCustomer;
-        this.NamaMenu = namaMenu;
-        this.QuantityMenu = quantityMenu;
-        this.HargaMenu = hargaMenu;
-    }
-
-    public DataCart() {
+        this.namaMenu = namaMenu;
+        this.quantityMenu = quantityMenu;
+        this.hargaMenu = hargaMenu;
     }
 
     public String getIdCart() {
@@ -40,26 +40,26 @@ public class DataCart {
     }
 
     public String getNamaMenu() {
-        return NamaMenu;
+        return namaMenu;
     }
 
     public void setNamaMenu(String namaMenu) {
-        NamaMenu = namaMenu;
+        this.namaMenu = namaMenu;
     }
 
     public String getQuantityMenu() {
-        return QuantityMenu;
+        return quantityMenu;
     }
 
     public void setQuantityMenu(String quantityMenu) {
-        QuantityMenu = quantityMenu;
+        this.quantityMenu = quantityMenu;
     }
 
     public String getHargaMenu() {
-        return HargaMenu;
+        return hargaMenu;
     }
 
     public void setHargaMenu(String hargaMenu) {
-        HargaMenu = hargaMenu;
+        this.hargaMenu = hargaMenu;
     }
 }
