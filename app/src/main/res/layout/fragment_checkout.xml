@@ -65,47 +65,54 @@
        <androidx.recyclerview.widget.RecyclerView
            android:id="@+id/view_cart"
            android:layout_width="match_parent"
-           android:layout_height="500dp"
+           android:layout_height="450dp"
            android:layout_below="@id/toolbar"
-           android:layout_marginTop="10dp" />
+           android:layout_marginTop="10dp"
+           tools:listitem="@layout/cart_item"/>
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:id="@+id/layoutharga"
-    android:layout_below="@id/view_cart">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="20dp"
-        android:text="Total Harga"
-        android:textSize="24dp"/>
-    <TextView
-        android:id="@+id/totalharga"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:text="0"
-        android:textSize="20dp" />
-</LinearLayout>
+       <androidx.cardview.widget.CardView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical"
+           android:background="@drawable/historyimg"
+           android:layout_below="@id/view_cart">
+           <LinearLayout
+               android:layout_marginTop="10dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:id="@+id/layoutharga">
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="Total Harga"
+                   android:textSize="24dp"
+                   android:layout_marginLeft="20dp"
+                   android:layout_weight="1"/>
+               <TextView
+                   android:id="@+id/totalharga"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="0"
+                   android:textSize="24dp"
+                   android:gravity="right"
+                   android:layout_marginRight="20dp"
+                   android:layout_weight="1"/>
+           </LinearLayout>
 
 
-       <Button
-           android:layout_marginTop="20dp"
-           android:id="@+id/button_checkout"
-           android:layout_width="200dp"
-           android:layout_height="wrap_content"
-           android:text="Checkout"
-           android:textColor="@color/white"
-           android:background="@drawable/background_home"
-           android:layout_below="@id/view_cart"
-           android:layout_marginLeft="80dp"
-           android:layout_toRightOf="@id/layoutharga"/>
+           <Button
+               android:layout_marginTop="30dp"
+               android:id="@+id/button_checkout"
+               android:layout_width="300dp"
+               android:layout_height="wrap_content"
+               android:text="Checkout"
+               android:textColor="@color/white"
+               android:background="@drawable/background_cart"
+               android:layout_below="@id/layoutharga"
+               android:layout_gravity="center"/>
+
+       </androidx.cardview.widget.CardView>
+
    </RelativeLayout>
-
-
-
 </FrameLayout>

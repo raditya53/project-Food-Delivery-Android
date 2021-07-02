@@ -25,7 +25,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.CartHo
 
     public class CartHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvNama, tvQuantity, tvEdit, tvHarga;
+        public TextView tvNama, tvQuantity, tvkategori, tvHarga;
         public ImageView ivFoto;
 
         public CartHolder(@NonNull View itemView) {

@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="71dp"
+        android:layout_height="80dp"
         android:layout_margin="8dp"
         android:orientation="horizontal">
 
@@ -37,12 +37,14 @@
             <TextView
                 android:id="@+id/txtHarga"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:text="5000"
                 android:layout_marginTop="3dp"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+
         </LinearLayout>
         <TextView
             android:id="@+id/txtQuantity"

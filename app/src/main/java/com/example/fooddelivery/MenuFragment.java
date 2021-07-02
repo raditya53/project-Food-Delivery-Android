@@ -55,7 +55,7 @@ import java.util.List;
 public class MenuFragment extends Fragment implements SearchView.OnQueryTextListener{
 
     private EditText etSearch;
-    private ImageButton catMakanan,catMinuman,catDesert,catAll;
+    private ImageButton catMakanan,catMinuman,catDesert,catAll,catBurger,catPasta,catSideDish,catCoffee;
     private RecyclerView recyclerView;
     private DatabaseReference databaseReference;
     private List<DataMenu> menuList;
@@ -85,6 +85,10 @@ public class MenuFragment extends Fragment implements SearchView.OnQueryTextList
         catMakanan = view.findViewById(R.id.Kategori_Makanan);
         catMinuman = view.findViewById(R.id.Kategori_Minuman);
         catDesert = view.findViewById(R.id.Kategori_Desert);
+        catBurger = view.findViewById(R.id.Kategori_Burger);
+        catPasta = view.findViewById(R.id.Kategori_Pasta);
+        catSideDish = view.findViewById(R.id.Kategori_Sidedish);
+        catCoffee = view.findViewById(R.id.Kategori_Coffee);
         catAll = view.findViewById(R.id.Kategori_All);
         addmenu = view.findViewById(R.id.addData);
         imgSearch = view.findViewById(R.id.iconSearch);
@@ -113,7 +117,7 @@ public class MenuFragment extends Fragment implements SearchView.OnQueryTextList
         catMinuman.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                kategori = "Minuman";
+                kategori = "Drink";
                 searchKategori(kategori);
             }
         });
@@ -121,7 +125,35 @@ public class MenuFragment extends Fragment implements SearchView.OnQueryTextList
         catMakanan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                kategori = "Makanan";
+                kategori = "Chicken";
+                searchKategori(kategori);
+            }
+        });
+        catCoffee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                kategori = "Coffee";
+                searchKategori(kategori);
+            }
+        });
+        catSideDish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                kategori = "Side Dish";
+                searchKategori(kategori);
+            }
+        });
+        catPasta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                kategori = "Pasta";
+                searchKategori(kategori);
+            }
+        });
+        catBurger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                kategori = "Burger";
                 searchKategori(kategori);
             }
         });
