@@ -12,17 +12,20 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +37,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,6 +48,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,11 +57,12 @@ import java.util.Locale;
 import java.util.Map;
 
 
-public class CheckoutFragment extends Fragment  {
+public class CheckoutFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private List<DataCart> dataCartList;
-    private TextView totalHarga,location;
+    private List<DataMenu> dataMenuList;
+    private TextView totalHarga, location;
     private Button btnCheckout;
 
     private String userUID;
@@ -89,19 +96,19 @@ public class CheckoutFragment extends Fragment  {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        dataCartList = new ArrayList<>();
+        dataMenuList = new ArrayList<>();
 
 //        Intent intent = getActivity().getIntent();
 //        location.setText(intent.getStringExtra("address"));
-        
+
         locationload();
 
-
         userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference("cart");
-
-        dataCartList = new ArrayList<>();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         btnCheckout.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 checkoutMenu();
@@ -113,44 +120,32 @@ public class CheckoutFragment extends Fragment  {
     private void locationload() {
         LocationPage locationPage = new LocationPage();
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(locationPage.SHARED_PREFS, Context.MODE_PRIVATE);
-        location.setText(sharedPreferences.getString(locationPage.SHARED_LOCATION,""));
+        location.setText(sharedPreferences.getString(locationPage.SHARED_LOCATION, ""));
 
-    }
-
-    private void checkoutMenu() {
-        databaseReference.orderByChild("idCustomer").equalTo(userUID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String idTransaksi = String.valueOf(System.currentTimeMillis());
-                Intent intent = new Intent(getContext(), PaymentPage.class);
-                intent.putExtra("location", location.getText().toString());
-                intent.putExtra("idTransaksi", idTransaksi);
-                intent.putExtra("totalHarga", total);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     private void showAllCart() {
-       listener =  databaseReference.orderByChild("idCustomer").equalTo(userUID).addValueEventListener(new ValueEventListener() {
+        dataCartList.clear();
+        listener = databaseReference.child("cart").orderByChild("idCustomer").equalTo(userUID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot item : snapshot.getChildren()) {
-
-                    DataCart dataCart = item.getValue(DataCart.class);
-                    dataCartList.add(dataCart);
-                    total = total + Integer.parseInt(dataCart.getHargaMenu());
+                if (snapshot.exists()) {
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        DataCart dataCart = item.getValue(DataCart.class);
+                        getCategori(dataCart.getIdMenu());
+                        dataCartList.add(dataCart);
+                        total = total + Integer.parseInt(dataCart.getHargaMenu());
+                    }
+                    totalHarga.setText(String.valueOf(total));
+                    databaseReference.removeEventListener(listener);
+                } else {
+                    Log.i("data kosong", "data cart tidak ditemukan");
+                    dataMenuList.clear();
+                    dataCartList.clear();
+                    callRecycler();
                 }
-                totalHarga.setText(String.valueOf(total));
-                databaseReference.removeEventListener(listener);
-                adapter = new CheckoutAdapter(getContext(), dataCartList);
-                recyclerView.setAdapter(adapter);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -158,6 +153,149 @@ public class CheckoutFragment extends Fragment  {
         });
 
     }
+
+    public void getCategori(String idMenu) {
+        listener = databaseReference.child("data-barang").orderByChild("id").equalTo(idMenu).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        DataMenu dataMenu = item.getValue(DataMenu.class);
+                        dataMenuList.add(dataMenu);
+                    }
+                    databaseReference.removeEventListener(listener);
+
+                    if (dataMenuList.size() == dataCartList.size()) {
+                        callRecycler();
+                    }
+                } else {
+                    Log.i("data kosong", "data menu tidak ditemukan");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void callRecycler() {
+        recyclerView.getRecycledViewPool().clear();
+        adapter = new CheckoutAdapter(getContext(), dataCartList, dataMenuList);
+        adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter);
+    }
+
+//    function to checkout menu
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void checkoutMenu() {
+        String idTransaksi = String.valueOf(System.currentTimeMillis());
+        String userLocation = location.getText().toString();
+        String deliverStatus = "Shipping";
+        String paymentStatus = "Verified";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String dateTime = String.valueOf(formatter.format(now));
+        String totalPrice = totalHarga.getText().toString();
+
+        HashMap<String, Object> idCart = new HashMap<>();
+        idCart.clear();
+
+
+        databaseReference.child("cart").orderByChild("idCustomer").equalTo(userUID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int i = 1;
+                HashMap<String, Object> cart = new HashMap<>();
+                if (snapshot.exists()) {
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        DataCart dataCart = item.getValue(DataCart.class);
+                        cart.put("idCart" + i, dataCart.getIdCart());
+                        i++;
+                    }
+                    idCart.put("idCart", cart);
+                    DataHistory transaction = new DataHistory(userLocation, deliverStatus, cart, userUID, idTransaksi, paymentStatus, dateTime, totalPrice);
+                    dataTransaction(transaction);
+                } else {
+                    Log.i("Error ", "Data Cart Not Found");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void dataTransaction(DataHistory dataHistory) {
+        databaseReference.child("transaction").child(dataHistory.getIdTransaksi()).setValue(dataHistory).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(getContext(), "Barang Berhasil ditambah", Toast.LENGTH_SHORT).show();
+                moveCartToHistory(dataHistory);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "Barang Gagal Ditambah", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void moveCartToHistory(DataHistory dataHistory) {
+        Object[] idCartValue = dataHistory.getIdCart().values().toArray();
+        for (int i = 0; i < idCartValue.length; i++) {
+            databaseReference.child("cart").orderByChild("idCart").equalTo(idCartValue[i].toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot item : snapshot.getChildren()) {
+                            DataCart dataCart = item.getValue(DataCart.class);
+                            databaseReference.child("history").child(dataCart.getIdCart()).setValue(dataCart).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getContext(), "Barang Berhasil Dipindahkan", Toast.LENGTH_SHORT).show();
+                                    removeCart(dataCart.getIdCart());
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getContext(), "Barang Gagal Dipindahkan", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    } else {
+                        Log.i("Error In Move Cart", "Snapshot not found");
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+    }
+
+    public void removeCart(String idCart) {
+        databaseReference.child("cart").child(idCart).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(getContext(), "Barang Berhasil Dihapus Dari Cart", Toast.LENGTH_SHORT).show();
+                showAllCart();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "Barang Gagal Dihapus Dari Cart", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+//    function to checkout menu
+
     @Override
     public void onResume() {
         super.onResume();
