@@ -32,6 +32,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         this.listDataMenu = dataMenu;
     }
 
+
+
     @NonNull
     @Override
     public HistoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -75,10 +77,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         return listHistory.size();
     }
 
+
+
     public class HistoryHolder extends RecyclerView.ViewHolder {
         public ImageView status, fotomakanan;
         public TextView tvNama, tvJumlah, tvHarga, tvTanggal, tvId, tvStatus;
         public Button detail;
+
 
         public HistoryHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,6 +108,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
                     ((Activity)ctx).overridePendingTransition(R.anim.push_up_in,R.anim.push_up_out);
                 }
             });
+
+
 
         }
     }

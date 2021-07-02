@@ -35,7 +35,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> im
 
     public class MenuHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvNama, tvHarga;
+        public TextView tvNama, tvHarga,tvKategori;
         public ImageView imageView;
 
         public MenuHolder(@NonNull View itemView) {
@@ -43,6 +43,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> im
             tvNama = itemView.findViewById(R.id.tv_name);
             tvHarga = itemView.findViewById(R.id.tv_deskripsi);
             imageView = itemView.findViewById(R.id.img_view);
+            tvKategori = itemView.findViewById( R.id.tv_kategori);
         }
     }
     @NonNull
@@ -57,6 +58,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> im
         DataMenu dataMenu = dataMenuList.get(position);
         holder.tvNama.setText(dataMenu.getNama());
         holder.tvHarga.setText(dataMenu.getHarga());
+        holder.tvKategori.setText(dataMenu.getKategori());
 
         Picasso.with(ctx).load(dataMenu.getImgUrl()).fit().centerCrop().into(holder.imageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +70,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> im
                 intent.putExtra("deskripsi", dataMenu.getDeskripsi());
                 intent.putExtra("harga", dataMenu.getHarga());
                 intent.putExtra("url", dataMenu.getImgUrl());
+                intent.putExtra("kategori", dataMenu.getKategori());
                 ctx.startActivity(intent);
                 ((Activity)ctx).overridePendingTransition(R.anim.push_up_in,R.anim.push_up_out);
             }

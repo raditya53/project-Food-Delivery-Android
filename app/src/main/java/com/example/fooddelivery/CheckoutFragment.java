@@ -158,8 +158,6 @@ public class CheckoutFragment extends Fragment  {
         });
 
     }
-
-
     @Override
     public void onResume() {
         super.onResume();

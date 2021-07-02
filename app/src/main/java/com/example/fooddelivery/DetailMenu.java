@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
 
 public class DetailMenu extends AppCompatActivity {
 
-    private TextView tvNama, tvDeskripsi, tvQuantity, tvHarga;
+    private TextView tvNama, tvDeskripsi, tvQuantity, tvHarga,tvkategori;
     private ImageButton increment,decrement;
     private ImageView imageView;
     private Button btnSubmit;
@@ -44,6 +44,7 @@ public class DetailMenu extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("cart");
 
+        tvkategori = findViewById(R.id.detailmenu_kategori);
         tvNama = findViewById(R.id.namaDetail);
         tvDeskripsi = findViewById(R.id.deskripsiDetail);
         tvQuantity = findViewById(R.id.quantity);
@@ -59,7 +60,7 @@ public class DetailMenu extends AppCompatActivity {
         tvNama.setText(intent.getStringExtra("nama"));
         tvDeskripsi.setText(intent.getStringExtra("deskripsi"));
         tvHarga.setText(intent.getStringExtra("harga"));
-
+        tvkategori.setText(intent.getStringExtra("kategori"));
         Uri = intent.getStringExtra("url");
         IdMenu = intent.getStringExtra("id");
 
@@ -154,7 +155,7 @@ public class DetailMenu extends AppCompatActivity {
 
     private void addToCart(String idMenu, String idCart) {
         int harga = Integer.parseInt(tvQuantity.getText().toString()) * Integer.parseInt(tvHarga.getText().toString());
-        DataCart cart = new DataCart(idCart, idMenu, idCust, tvNama.getText().toString(), tvQuantity.getText().toString(), String.valueOf(harga));
+        DataCart cart = new DataCart(String.valueOf(harga), idCart, idCust, idMenu,  tvNama.getText().toString(), tvQuantity.getText().toString());
         databaseReference.child(idCart).setValue(cart).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

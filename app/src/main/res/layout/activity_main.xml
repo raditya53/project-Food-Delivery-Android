@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:textColor="@color/white"
-        android:text="beta 1.0" />
+        android:text="beta 1.2" />
 
 
 </RelativeLayout>

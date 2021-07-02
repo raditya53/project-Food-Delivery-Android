@@ -39,6 +39,7 @@ public class Activity_History extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+        recyclerView = findViewById(R.id.recycle_view);
         back = findViewById(R.id.backward);
         recyclerView = findViewById(R.id.recycle_view);
         userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
