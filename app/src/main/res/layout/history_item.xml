@@ -82,6 +82,14 @@
                     android:layout_marginTop="5dp"
                     android:text="1 Total Barang"
                     android:textSize="16dp"/>
+                <TextView
+                    android:visibility="invisible"
+                    android:id="@+id/statustext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Berhasil"
+                    android:textSize="16dp"/>
 
             </LinearLayout>
         </LinearLayout>

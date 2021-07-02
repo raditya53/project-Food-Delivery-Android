@@ -40,44 +40,117 @@
 
         <TextView
             android:id="@+id/accountName"
-            android:layout_below="@id/container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
-            android:layout_centerHorizontal="true"/>
+            android:layout_below="@id/container"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="20dp"
+            android:text="Name" />
 
-        <Button
+
+        <View
+            android:id="@+id/divider"
             android:layout_marginTop="60dp"
-            android:id="@+id/button_update"
+            android:layout_marginBottom="5dp"
             android:layout_below="@id/accountName"
             android:layout_width="match_parent"
-            android:text="Update Account"
-            android:layout_height="wrap_content"/>
-        <Button
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:id="@+id/containerupdateaccount"
+            android:layout_below="@id/divider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button_history"
-            android:layout_below="@id/button_update"
-            android:text="History"/>
-        <Button
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:id="@+id/button_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_manage_accounts_24"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:drawablePadding="10dp"
+                android:textSize="20dp"
+                android:text="Update Account"
+                android:gravity="left|center"/>
+        </LinearLayout>
+        <View
+            android:id="@+id/divider2"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@id/containerupdateaccount"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:id="@+id/containerhistory"
+            android:layout_below="@id/divider2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/aboutUs"
-            android:text="About Us"
-            android:layout_below="@id/button_history"/>
-        <Button
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:id="@+id/button_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_history_24"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:drawablePadding="10dp"
+                android:textSize="20dp"
+                android:text="History"
+                android:gravity="left|center"/>
+        </LinearLayout>
+        <View
+            android:id="@+id/divider3"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/containerhistory"
             android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+        <LinearLayout
+            android:id="@+id/containeraboutUs"
+            android:layout_below="@id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginLeft="22dp"
+                android:id="@+id/aboutUs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_information"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:drawablePadding="14dp"
+                android:textSize="20dp"
+                android:text="About Us"
+                android:gravity="left|center"/>
+        </LinearLayout>
+        <View
+            android:id="@+id/divider4"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@id/containeraboutUs"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+        <Button
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:id="@+id/button_logout"
             android:text="Logout"
+            android:layout_marginLeft="21dp"
             android:textColor="@color/white"
-            android:layout_below="@+id/button_history"
-            android:layout_marginTop="200dp"
+            android:layout_below="@+id/containerhistory"
+            android:layout_marginTop="180dp"
             android:background="#ff0000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="beta 1.0"
+            android:text="beta 1.2"
             android:layout_below="@+id/button_logout"
             android:layout_centerHorizontal="true"
             android:textSize="11dp"

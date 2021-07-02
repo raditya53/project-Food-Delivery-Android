@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.CartHo
     public class CartHolder extends RecyclerView.ViewHolder {
 
         public TextView tvNama, tvQuantity, tvEdit, tvHarga;
+        public ImageView ivFoto;
 
         public CartHolder(@NonNull View itemView) {
             super(itemView);
@@ -32,6 +34,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.CartHo
             tvNama = itemView.findViewById(R.id.txtNama);
             tvQuantity = itemView.findViewById(R.id.txtQuantity);
             tvHarga = itemView.findViewById(R.id.txtHarga);
+            ivFoto = itemView.findViewById(R.id.fotomenucart);
 
         }
     }

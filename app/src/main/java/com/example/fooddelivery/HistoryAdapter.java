@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
         this.ctx = ctx;
         this.lHistory = lHistory;
     }
+
+
 
     @NonNull
     @Override
@@ -41,14 +45,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
     }
 
     public class HistoryHolder extends RecyclerView.ViewHolder{
-
-        public TextView tvNama, tvTotalHarga, tvCheck, tvItem;
+        public ImageView status;
+        public TextView tvNama,tvJumlah,tvHarga,tvTanggal,tvId;
         public HistoryHolder(@NonNull View itemView) {
             super(itemView);
-//            tvCheck = itemView.findViewById(R.id.txtCheck);
-//            tvNama = itemView.findViewById(R.id.txtNamaHistory);
-//            tvItem = itemView.findViewById(R.id.txtItem);
-//            tvTotalHarga = itemView.findViewById(R.id.txtTotalHarga);
+            status = itemView.findViewById(R.id.imgstatus);
+            tvJumlah = itemView.findViewById(R.id.jumlahmakanan_history);
+            tvId = itemView.findViewById(R.id.idtransaksi);
+            tvTanggal = itemView.findViewById(R.id.tanggalhistory);
+
+
         }
     }
 }

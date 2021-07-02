@@ -42,6 +42,7 @@
                 android:textSize="18dp"/>
 
             <TextView
+                android:id="@+id/status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -65,6 +66,7 @@
                 android:textSize="18dp"/>
 
             <TextView
+                android:id="@+id/tanggalhistorydetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -87,6 +89,7 @@
                 android:textSize="18dp"/>
 
             <TextView
+                android:id="@+id/idtransaksidetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"

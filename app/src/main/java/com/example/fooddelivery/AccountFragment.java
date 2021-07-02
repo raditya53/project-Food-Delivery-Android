@@ -26,7 +26,8 @@ import com.squareup.picasso.Picasso;
 
 
 public class AccountFragment extends Fragment {
-private Button update, logout,aboutUs, history;
+private Button logout;
+private TextView update,aboutUs, history;
 
 private DatabaseReference databaseReference;
 private FirebaseAuth firebaseAuth;
