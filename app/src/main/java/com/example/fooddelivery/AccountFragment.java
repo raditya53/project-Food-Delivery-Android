@@ -89,7 +89,6 @@ private TextView nama;
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Under Development, Thanks!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getContext(), Activity_History.class);
                 startActivity(intent);
             }
