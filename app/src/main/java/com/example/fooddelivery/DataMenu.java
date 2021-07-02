@@ -1,65 +1,65 @@
 package com.example.fooddelivery;
 
 public class DataMenu {
-    private String Id, Nama, Deskripsi, Harga, ImgUrl, Kategori;
-
-    public DataMenu(String id, String nama, String deskripsi, String harga, String imgUrl, String kategori) {
-        Id = id;
-        Nama = nama;
-        Deskripsi = deskripsi;
-        Harga = harga;
-        ImgUrl = imgUrl;
-        Kategori = kategori;
-    }
+    private String id, nama, deskripsi, harga, imgUrl, kategori;
 
     public DataMenu() {
     }
 
+    public DataMenu(String id, String nama, String deskripsi, String harga, String imgUrl, String kategori) {
+        this.id = id;
+        this.nama = nama;
+        this.deskripsi = deskripsi;
+        this.harga = harga;
+        this.imgUrl = imgUrl;
+        this.kategori = kategori;
+    }
+
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNama() {
-        return Nama;
+        return nama;
     }
 
     public void setNama(String nama) {
-        Nama = nama;
+        this.nama = nama;
     }
 
     public String getDeskripsi() {
-        return Deskripsi;
+        return deskripsi;
     }
 
     public void setDeskripsi(String deskripsi) {
-        Deskripsi = deskripsi;
+        this.deskripsi = deskripsi;
     }
 
     public String getHarga() {
-        return Harga;
+        return harga;
     }
 
     public void setHarga(String harga) {
-        Harga = harga;
+        this.harga = harga;
     }
 
     public String getImgUrl() {
-        return ImgUrl;
+        return imgUrl;
     }
 
     public void setImgUrl(String imgUrl) {
-        ImgUrl = imgUrl;
+        this.imgUrl = imgUrl;
     }
 
     public String getKategori() {
-        return Kategori;
+        return kategori;
     }
 
     public void setKategori(String kategori) {
-        Kategori = kategori;
+        this.kategori = kategori;
     }
 }
