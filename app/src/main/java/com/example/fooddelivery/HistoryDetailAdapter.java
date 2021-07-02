@@ -1,6 +1,7 @@
 package com.example.fooddelivery;
 
 import android.content.Context;
+
 import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,11 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
 
+import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class HistoryDetailAdapter extends RecyclerView.Adapter<HistoryDetailAdapter.HistoryDetailHolder> {
@@ -45,6 +47,7 @@ public class HistoryDetailAdapter extends RecyclerView.Adapter<HistoryDetailAdap
         holder.jumlahbarang.setText(dataCart.getQuantityMenu() + " Items");
 
         Picasso.with(ctx).load(dataMenu.getImgUrl()).into(holder.imageView);
+
     }
 
     @Override
@@ -64,3 +67,4 @@ public class HistoryDetailAdapter extends RecyclerView.Adapter<HistoryDetailAdap
         }
     }
 }
+
