@@ -2,11 +2,14 @@ package com.example.fooddelivery;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -25,7 +28,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +61,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import pl.droidsonroids.gif.GifImageView;
+
 
 public class CheckoutFragment extends Fragment {
 
@@ -65,6 +72,7 @@ public class CheckoutFragment extends Fragment {
     private TextView totalHarga, location;
     private Button btnCheckout;
 
+    private Dialog dialog;
     private String userUID;
     private DatabaseReference databaseReference, databaseReference1;
 
@@ -112,9 +120,56 @@ public class CheckoutFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 checkoutMenu();
+                showDialog();
             }
         });
 
+    }
+
+    private void showDialog() {
+        Handler h = new Handler();
+        dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.activity_dialog_checkout);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
+        TextView textView = dialog.findViewById(R.id.text);
+        GifImageView gifImage = dialog.findViewById(R.id.image);
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+        dialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (dialog.isShowing()) {
+                    h.postDelayed(new Runnable() {
+                        int i = 0;
+                        @Override
+                        public void run() {
+                            textView.setText("Gathering Information...(" + i + "/9)");
+                            i += 1;
+                            h.postDelayed(this, 1000);
+                            if (i > 9) {
+                                h.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        gifImage.setVisibility(View.GONE);
+                                        textView.setText("Payment Accepted ✔️");
+                                        h.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Log.i("dialog status", "dialog dismiss");
+                                                totalHarga.setText("0");
+                                                h.removeCallbacksAndMessages(null);
+                                                dialog.hide();
+                                            }
+                                        }, 2000);
+                                    }
+                                }, 1000);
+                            }
+                        }
+                    }, 2000);
+                }
+            }
+        }, 1000);
     }
 
     private void locationload() {
