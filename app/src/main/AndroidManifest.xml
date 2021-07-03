@@ -59,6 +59,10 @@
             android:name=".DetailHistory"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Kurir"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
         <activity android:name=".Activity_History" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".LocationPage"/>

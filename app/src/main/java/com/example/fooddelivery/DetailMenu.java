@@ -27,7 +27,7 @@ public class DetailMenu extends AppCompatActivity {
     private TextView tvNama, tvDeskripsi, tvQuantity, tvHarga,tvkategori;
     private ImageButton increment,decrement;
     private ImageView imageView;
-    private Button btnSubmit;
+    private Button btnSubmit, backbtn;
 
     private int Quantity;
     private String Uri,IdMenu,idCust, IdCartNow;
@@ -53,6 +53,16 @@ public class DetailMenu extends AppCompatActivity {
         decrement = findViewById(R.id.decrement);
         imageView = findViewById(R.id.imgDetail);
         btnSubmit = findViewById(R.id.submit);
+        backbtn = findViewById(R.id.back_button);
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailMenu.this, NavigasiTab.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+            }
+        });
 
         idCust = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -131,20 +141,20 @@ public class DetailMenu extends AppCompatActivity {
         listener = databaseReference.orderByChild("idMenu").equalTo(idmenu).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-               if(snapshot.exists()) {
-                   for (DataSnapshot ds : snapshot.getChildren()) {
-                       DataCart dataCart = ds.getValue(DataCart.class);
-                       if(dataCart.getIdCustomer().equals(idCust)) {
-                           Quantity = Integer.parseInt(dataCart.getQuantityMenu());
-                           tvQuantity.setText(dataCart.getQuantityMenu());
-                           IdCartNow = dataCart.getIdCart();
-                           isExist = true;
-                       }
-                   }
-               } else {
-                   isExist = false;
-               }
-               databaseReference.removeEventListener(listener);
+                if(snapshot.exists()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        DataCart dataCart = ds.getValue(DataCart.class);
+                        if(dataCart.getIdCustomer().equals(idCust)) {
+                            Quantity = Integer.parseInt(dataCart.getQuantityMenu());
+                            tvQuantity.setText(dataCart.getQuantityMenu());
+                            IdCartNow = dataCart.getIdCart();
+                            isExist = true;
+                        }
+                    }
+                } else {
+                    isExist = false;
+                }
+                databaseReference.removeEventListener(listener);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

@@ -103,7 +103,7 @@ public class CheckoutFragment extends Fragment {
         location = view.findViewById(R.id.location);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        totalHarga.setText("0");
         dataCartList = new ArrayList<>();
         dataMenuList = new ArrayList<>();
 
@@ -119,7 +119,6 @@ public class CheckoutFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                checkoutMenu();
                 showDialog();
             }
         });
@@ -149,10 +148,12 @@ public class CheckoutFragment extends Fragment {
                             h.postDelayed(this, 1000);
                             if (i > 9) {
                                 h.postDelayed(new Runnable() {
+                                    @RequiresApi(api = Build.VERSION_CODES.O)
                                     @Override
                                     public void run() {
                                         gifImage.setVisibility(View.GONE);
                                         textView.setText("Payment Accepted ✔️");
+                                        checkoutMenu();
                                         h.postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
@@ -195,6 +196,7 @@ public class CheckoutFragment extends Fragment {
                     databaseReference.removeEventListener(listener);
                 } else {
                     Log.i("data kosong", "data cart tidak ditemukan");
+                    totalHarga.setText("0");
                     dataMenuList.clear();
                     dataCartList.clear();
                     callRecycler();
@@ -289,7 +291,6 @@ public class CheckoutFragment extends Fragment {
         databaseReference.child("transaction").child(dataHistory.getIdTransaksi()).setValue(dataHistory).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getContext(), "Barang Berhasil ditambah", Toast.LENGTH_SHORT).show();
                 moveCartToHistory(dataHistory);
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -312,7 +313,6 @@ public class CheckoutFragment extends Fragment {
                             databaseReference.child("history").child(dataCart.getIdCart()).setValue(dataCart).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(getContext(), "Barang Berhasil Dipindahkan", Toast.LENGTH_SHORT).show();
                                     removeCart(dataCart.getIdCart());
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
@@ -338,7 +338,6 @@ public class CheckoutFragment extends Fragment {
         databaseReference.child("cart").child(idCart).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getContext(), "Barang Berhasil Dihapus Dari Cart", Toast.LENGTH_SHORT).show();
                 showAllCart();
             }
         }).addOnFailureListener(new OnFailureListener() {
