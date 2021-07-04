@@ -104,8 +104,6 @@ public class CheckoutFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         totalHarga.setText("0");
-        dataCartList = new ArrayList<>();
-        dataMenuList = new ArrayList<>();
 
 //        Intent intent = getActivity().getIntent();
 //        location.setText(intent.getStringExtra("address"));
@@ -181,11 +179,13 @@ public class CheckoutFragment extends Fragment {
     }
 
     private void showAllCart() {
-        dataCartList.clear();
         listener = databaseReference.child("cart").orderByChild("idCustomer").equalTo(userUID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
+                    dataCartList = new ArrayList<>();
+                    dataMenuList = new ArrayList<>();
+                    total = 0;
                     for (DataSnapshot item : snapshot.getChildren()) {
                         DataCart dataCart = item.getValue(DataCart.class);
                         getCategori(dataCart.getIdMenu());
@@ -354,7 +354,6 @@ public class CheckoutFragment extends Fragment {
     public void onResume() {
         super.onResume();
         total = 0;
-        dataCartList.clear();
         showAllCart();
     }
 }
