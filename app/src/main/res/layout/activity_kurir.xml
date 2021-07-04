@@ -10,13 +10,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bglogin">
-        <TextView
-            android:id="@+id/judul_toolbar"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Delivery"
-            android:textSize="20dp"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/judul_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Delivery"
+                android:textSize="20dp"/>
+            <ImageButton
+                android:id="@+id/logoutkurir"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_baseline_logout_24"
+                android:layout_marginRight="10dp"/>
+        </LinearLayout>
+
     </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/view_kurir"

@@ -2,8 +2,12 @@ package com.example.fooddelivery;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,12 +31,15 @@ import java.util.List;
 
 public class Kurir extends AppCompatActivity {
     private TextView textView;
+    private ImageButton imageButton;
     private RecyclerView recyclerView;
     private List<DataHistory> dataHistoryList;
     private List<DataUser> dataUserList;
     private String deliverStatus;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     KurirAdapter kurirAdapter;
+    public static final String SHARED_PREFS = "roleAccount";
+    public static final String SHARED_ROLE = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,9 +47,46 @@ public class Kurir extends AppCompatActivity {
         setContentView(R.layout.activity_kurir);
         textView = findViewById(R.id.judul_toolbar);
         recyclerView = findViewById(R.id.view_kurir);
+        imageButton = findViewById(R.id.logoutkurir);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(Kurir.this));
         showAllData();
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutKurir();
+            }
+        });
+    }
+
+    private void logoutKurir() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm Logout");
+        builder.setMessage("Logout From Kurir Account?");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                editor.putString(SHARED_ROLE, "No User");
+                editor.apply();
+                dialog.dismiss();
+
+                Intent intent = new Intent(Kurir.this, MultiPage.class);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(Kurir.this, "Cancel Logout", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     private void showAllData(){
