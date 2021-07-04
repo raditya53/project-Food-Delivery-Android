@@ -1,6 +1,7 @@
 package com.example.fooddelivery;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -27,6 +28,9 @@ public class LoginPage extends AppCompatActivity {
     private EditText etEmail, etPassword;
 
     private FirebaseAuth firebaseAuth;
+
+    public static final String SHARED_PREFS = "roleAccount";
+    public static final String SHARED_ROLE = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,47 +89,58 @@ public class LoginPage extends AppCompatActivity {
             etPassword.requestFocus();
         }
 
-        firebaseAuth.signInWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                            if(firebaseUser.isEmailVerified()) {
-                                Intent intent = new Intent(LoginPage.this, LocationPage.class);
-                                startActivity(intent);
-                            } else {
-                                AlertDialog builder = new AlertDialog.Builder(LoginPage.this)
-                                        .setTitle("Account Unverified")
-                                        .setMessage("Your Account is Unverified,\nPlease Check Your Email \nOr Send New Verification?")
-                                        .setPositiveButton("Yes", null)
-                                        .setNegativeButton("No", null)
-                                        .show();
-                                Button positiveBtn = builder.getButton(AlertDialog.BUTTON_POSITIVE);
-                                positiveBtn.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        firebaseUser.sendEmailVerification();
-                                        Toast.makeText(LoginPage.this, "Email Sent!", Toast.LENGTH_SHORT).show();
-                                        builder.dismiss();
-                                    }
-                                });
-                                Button negativBtn = builder.getButton(AlertDialog.BUTTON_NEGATIVE);
-                                negativBtn.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Toast.makeText(LoginPage.this, "Please Check Your Email To Verify Your Account!", Toast.LENGTH_SHORT).show();
-                                        builder.dismiss();
-                                    }
-                                });
+        if(etEmail.getText().toString().equals("kurir@makanlih.com") && etPassword.getText().toString().equals("akunkurir")) {
+            SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            editor.putString(SHARED_ROLE, "kurir");
+            editor.apply();
+
+            Intent intent = new Intent(LoginPage.this, Kurir.class);
+            startActivity(intent);
+        } else {
+            firebaseAuth.signInWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()) {
+                                FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                                if(firebaseUser.isEmailVerified()) {
+                                    Intent intent = new Intent(LoginPage.this, LocationPage.class);
+                                    startActivity(intent);
+                                } else {
+                                    AlertDialog builder = new AlertDialog.Builder(LoginPage.this)
+                                            .setTitle("Account Unverified")
+                                            .setMessage("Your Account is Unverified,\nPlease Check Your Email \nOr Send New Verification?")
+                                            .setPositiveButton("Yes", null)
+                                            .setNegativeButton("No", null)
+                                            .show();
+                                    Button positiveBtn = builder.getButton(AlertDialog.BUTTON_POSITIVE);
+                                    positiveBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            firebaseUser.sendEmailVerification();
+                                            Toast.makeText(LoginPage.this, "Email Sent!", Toast.LENGTH_SHORT).show();
+                                            builder.dismiss();
+                                        }
+                                    });
+                                    Button negativBtn = builder.getButton(AlertDialog.BUTTON_NEGATIVE);
+                                    negativBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Toast.makeText(LoginPage.this, "Please Check Your Email To Verify Your Account!", Toast.LENGTH_SHORT).show();
+                                            builder.dismiss();
+                                        }
+                                    });
+                                }
                             }
                         }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(LoginPage.this, "Login Failed! Please Check Your Credentials", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(LoginPage.this, "Login Failed! Please Check Your Credentials", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }
