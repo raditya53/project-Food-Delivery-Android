@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,6 +51,8 @@ public class Kurir extends AppCompatActivity {
         imageButton = findViewById(R.id.logoutkurir);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(Kurir.this));
+        dataHistoryList = new ArrayList<>();
+        dataUserList = new ArrayList<>();
         showAllData();
 
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +61,29 @@ public class Kurir extends AppCompatActivity {
                 logoutKurir();
             }
         });
+    }
+
+    public void location(String address) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Open Map");
+        builder.setMessage("Open Map For Address:\n" + address);
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Uri mapUri = Uri.parse("geo:0,0?q=" + Uri.encode(address));
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     private void logoutKurir() {
@@ -94,8 +120,8 @@ public class Kurir extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
-                    dataHistoryList = new ArrayList<>();
-                    dataUserList = new ArrayList<>();
+                    dataHistoryList.clear();
+                    dataUserList.clear();
                     for(DataSnapshot item : snapshot.getChildren()) {
                         DataHistory dataHistory = item.getValue(DataHistory.class);
                         dataHistoryList.add(dataHistory);

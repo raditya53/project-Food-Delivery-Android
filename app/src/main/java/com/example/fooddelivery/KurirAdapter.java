@@ -1,6 +1,7 @@
 package com.example.fooddelivery;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class KurirAdapter extends RecyclerView.Adapter<KurirAdapter.KurirHolder>
         DataHistory dataHistory = dataHistoryList.get(position);
         DataUser dataUser = dataUserList.get(position);
         holder.alamat.setText(dataHistory.getLocation());
+        holder.alamat.setTextColor(Color.parseColor("#3366BB"));
         holder.tanggal.setText(dataHistory.getTanggalPembelian());
         holder.idTrans.setText(dataHistory.getIdTransaksi());
         holder.namaCust.setText(dataUser.getFullname());
@@ -74,6 +76,15 @@ public class KurirAdapter extends RecyclerView.Adapter<KurirAdapter.KurirHolder>
                 public void onClick(View v) {
                     if (ctx instanceof Kurir) {
                         ((Kurir)ctx).DialogKurir(idTrans.getText().toString(), "Failed");
+                    }
+                }
+            });
+
+            alamat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (ctx instanceof Kurir) {
+                        ((Kurir)ctx).location(alamat.getText().toString());
                     }
                 }
             });
